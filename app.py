@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import pickle
 import os
-from utils.config import *
+from config import *
 
 app = Flask(__name__)
 
@@ -11,10 +11,10 @@ app = Flask(__name__)
 def load_model_and_encoders():
     """Load trained XGBoost model and encoders"""
     try:
-        with open('models/xgb_model.pkl', 'rb') as f:
+        with open('xgb_model.pkl', 'rb') as f:
             model = pickle.load(f)
         
-        with open('models/encoders.pkl', 'rb') as f:
+        with open('encoders.pkl', 'rb') as f:
             encoders = pickle.load(f)
         
         print("Model and encoders loaded successfully")
@@ -38,7 +38,7 @@ if model is None or encoders is None:
     }
 
 # Load configuration
-from utils.config import *
+from config import *
 
 def calculate_fertilizer_requirements(crop, soil_n, soil_p, soil_k, total_acres):
     """Calculate fertilizer requirements based on crop and soil NPK"""
@@ -227,12 +227,7 @@ def index():
     )
 
 if __name__ == "__main__":
-    # Create necessary directories
-    os.makedirs("static/images", exist_ok=True)
-    os.makedirs("static/css", exist_ok=True)
-    os.makedirs("templates", exist_ok=True)
-    os.makedirs("models", exist_ok=True)
-    os.makedirs("data", exist_ok=True)
+    
     
     print("Starting Crop Yield Prediction Application...")
     print("Visit http://localhost:5000 in your browser")
